@@ -1,3 +1,34 @@
+<!-- Funciones de javascript que van a estar en html -->
+
 <script>
+
+    //
+    function crearTablaContactos(){   
+        google.script.run.withSuccessHandler(
+            function(obj){
+                let tabla = document.createElement("table");
+                let tablaBody = document.createElement("tbody");
+
+                Array.from(obj).forEach(filaActual =>
+                {
+                    let fila = document.createElement("tr");
+                    filaActual.forEach(celdaActual =>
+                    {
+                        let celda = document.createElement("td");
+                        celda.texContent = celdaActual;
+                        fila.appendChild(celda);
+                    });
+                    tablaBody.appendChild(fila);
+                });
+                //agregamos el cuerpo a la tabla   
+                tabla.appendChild(tablaBody);
+                //agregamos clases a la tabla
+                tabla.classList.add("table","table-striped", "table-success", "border", "border-3");
+                //agregamos tabla a la pagina
+                document.getElementById("divContactos").appendChild(tabla);
+
+            }
+         ).obtenerContactos();
+    }
 
 </script>
