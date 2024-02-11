@@ -1,6 +1,9 @@
 <!-- Funciones de javascript que van a estar en html -->
 
 <script>
+    const NOTIFICACION_OK= 1;
+    const NOTIFICACION_DANGER= 2;
+    const NOTIFICACION_WARNING= 3;
 
     //Funcion que recupera los datos de google sheets    
     function crearTablaContactos()
@@ -78,13 +81,14 @@
         document.getElementById('divContactos').appendChild(tabla);
 
         /* Mostrar notificacion de OK*/
-        crearNotificacion(1, 'Contactos Obtenidos correctamente', 'Todo en orden');
+        crearNotificacion(NOTIFICACION_OK, 'Contactos Obtenidos correctamente', 'Todo en orden');
 
     }
 
 
     function crearTablaContactosError(){
         /* Mostrar notificacion de error */
+        crearNotificacion(NOTIFICACION_DANGER, 'Error al cargar Contactos', 'ERROR');
     }
 
 
@@ -97,11 +101,31 @@
         let notificacion = bootstrap.Toast.getOrCreateInstance(elementoNotificacion);
 
         //editar Notificacion
-        iconoNotificacion.className = '';
-        iconoNotificacion.classList.add('bi', 'bi-check2-square');
         mensajeNotificacion.textContent = mensaje;
         tituloNotificacion.textContent = titulo;
-        elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--color-verde-oscuro');
+
+        switch (tipo){
+            case NOTIFICACION_OK:
+            iconoNotificacion.className = '';
+            iconoNotificacion.classList.add('bi', 'bi-check2-square');        
+            elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--color-verde-oscuro');
+            break
+
+            case NOTIFICACION_DANGER:
+            iconoNotificacion.className = '';
+            iconoNotificacion.classList.add('bi', 'bi-bug');        
+            elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--color-rojo-oscuro');
+            break
+
+            case NOTIFICACION_WARNING:
+            iconoNotificacion.className = '';
+            iconoNotificacion.classList.add('bi', 'bi-exclamation-square');        
+            elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--color-amarillo-oscuro');
+            break
+
+            
+        }
+
 
 
         //mostrar Notificacion
