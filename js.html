@@ -4,9 +4,13 @@
 
     //Funcion que recupera los datos de google sheets    
     function crearTablaContactos()
-    {   
-        let tabla = document.getElementById('tablaContactos');                
-        if(tabla) tabla.remove();
+    {  
+        //Borrar tabla si existe
+        eliminarTabla(); 
+
+        //Creacion de icono de Carga
+        crearLoaderAnillo('divContactos');
+        //crearLoaderPuntos('divContactos');   //tengo 2 opciones de Loader
 
         google.script.run
         .withSuccessHandler(crearTablaContactosCorrectamente)
@@ -44,7 +48,7 @@
                     celda.textContent = obj[i][j];
                     fila.appendChild(celda);
                 }
-                tablaBody.appendChild(fila);             
+                tablaBody.appendChild(fila);         
                 
             }
         
@@ -78,11 +82,17 @@
 
         // Mostrar notificacion de OK
         crearNotificacionOk('Contactos Obtenidos correctamente', 'Todo en orden');
+
+        //eliminamo el Loader
+        eliminarLoader();
     }
 
     function crearTablaContactosError(){
         //Mostrar notificacion de error 
         crearNotificacionError('Error al cargar Contactos', 'ERROR');
+
+        //eliminamo el Loader
+        eliminarLoader();
     }
 
 
@@ -133,6 +143,39 @@
         let elementoNotificacion = document.getElementById('notificacion');
         elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(color);
     }
+
+    function eliminarTabla(){
+        let tabla = document.getElementById('tablaContactos');                
+        if(tabla) tabla.remove();
+    }
+
+    function crearLoader(elementoPadre){
+        eliminarLoader();        
+        let loader = document.createElement('div');
+        loader.id = 'loader';
+        loader.appendChild(document.createElement('div'));
+        loader.appendChild(document.createElement('div'));
+        loader.appendChild(document.createElement('div'));
+        loader.appendChild(document.createElement('div'));        
+        return document.getElementById(elementoPadre).appendChild(loader);       
+    }
+
+    function crearLoaderPuntos(elementoPadre){
+        let loader = crearLoader(elementoPadre);
+        loader.classList.add('lds-ellipsis');
+    }
+
+    function crearLoaderAnillo(elementoPadre){
+        let loader = crearLoader(elementoPadre);
+        loader.classList.add('lds-ring');
+
+    }
+
+    function eliminarLoader(){
+        let loader= document.getElementById('loader');
+        if(loader) loader.remove();
+    }
+
 
     /* function crearNotificacion(tipo, mensaje, titulo){       //funcion con switch
         //obtener datos
