@@ -1,15 +1,29 @@
 <!-- PARTE PRINCIPAL DE LA APLICACION -->
 
 <main>
-    <!-- Botones -->
-    <div class="d-flex justify-content-center mb-4">
-        <button class="btn btn-success m-3" onclick="crearTablaContactos()"> Mostrar Contactos </button>
+    
+    <!------------------ FORMULARIO -->
+    <div class="d-flex justify-content-center my-3">        
+        <form action="https://script.google.com/macros/s/AKfycbw1X0Akkk3RV25xJf_ZXC9Q-Ck4Nqg_QdjIL4_bRtk/dev" method="post" id="formulario">
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Ingresa Nombre de Contacto</label>
+                <input type="text" class="form-control" name="nombre" id="nombre">
+            </div>
+
+            <div class="mb-3">
+                <label for="correo" class="form-label">Ingresa correo del Contacto</label>
+                <input type="email" class="form-control" name="correo" id="correo">
+            </div> 
+            <!-- Botones -->  
+            <button type="button" class="btn btn-success m-3" onclick="crearTablaContactos()"> Mostrar Contactos </button>
+            <button type="submit" class="btn btn-primary">Crear Contacto</button>
+        </form>  
     </div>
 
 
-    <!-- Tabla de contactos -->
-    <div class="container-lg mb-4 d-flex justify-content-center" id="divContactos">        
-    </div>
+    <!-- TABLA DE CONTACTOS -->
+    <div class="container-lg mb-4 d-flex justify-content-center" id="divContactos"></div>
 
 
     <!-- NOTIFICACIONES (BOOSTRAP TOAST)-->
