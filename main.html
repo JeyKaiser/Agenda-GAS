@@ -4,8 +4,7 @@
     
     <!------------------ FORMULARIO -->
     <div class="d-flex justify-content-center my-3">        
-        <form action="https://script.google.com/macros/s/AKfycbw1X0Akkk3RV25xJf_ZXC9Q-Ck4Nqg_QdjIL4_bRtk/dev" method="post" id="formulario">
-
+        <form onsubmit="insertarContacto()" method="dialog" id="formulario">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Ingresa Nombre de Contacto</label>
                 <input type="text" class="form-control" name="nombre" id="nombre">
@@ -25,7 +24,6 @@
     <!-- TABLA DE CONTACTOS -->
     <div class="container-lg mb-4 d-flex justify-content-center" id="divContactos"></div>
 
-
     <!-- NOTIFICACIONES (BOOSTRAP TOAST)-->
     <!-- Podria utilizar un boton que active y lanse la notificacion
     <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>-->
@@ -44,11 +42,4 @@
             <div class="toast-body" id="mensajeNotificacion"></div>
         </div>
     </div>
-
-
-
-
-
-
-
 </main>

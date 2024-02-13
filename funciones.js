@@ -1,11 +1,10 @@
 const HOJA = SpreadsheetApp.openById('1TW8eC6RJnifsaU5tojnxx7MHjJ5_QLBef5EwMqh0QWQ').getActiveSheet();
 
-function doGet(){
+function doGet(){     //pasamos los datos por la url (cuando no son datos muy importantes)
     return HtmlService.createTemplateFromFile("web").evaluate().setTitle("Agenda Google Apps Script");
 }
 
-function doPost(datos){
-    insertarContactos(datos.parameter.nombre, datos.parameter.correo);
+function doPost(datos){    
     return HtmlService.createTemplateFromFile("web").evaluate().setTitle("Agenda Google Apps Script");
 }
 
@@ -23,3 +22,4 @@ function obtenerContactos(){
 function insertarContactos(nombre, correo){
     HOJA.appendRow([nombre,correo]);
 }
+
